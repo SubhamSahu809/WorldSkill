@@ -1,0 +1,60 @@
+:root {
+    --star-gold: #FFD700;
+    --star-background: #212121; /* Dark background color from image */
+    --star-size: 40px;
+    --star-padding: 5px;
+}
+
+.rating-stars {
+    display: inline-flex;
+    flex-direction: row-reverse; /* Allows hover from left to right */
+    justify-content: center;
+    background-color: var(--star-background);
+    padding: var(--star-padding);
+    border-radius: 5px;
+}
+
+.star {
+    font-size: var(--star-size);
+    cursor: pointer;
+    color: #ccc; /* Default grey outline */
+    position: relative;
+    padding: 0 2px;
+}
+
+/* Unicode character for a star */
+.star::before {
+    content: '\2605'; 
+    position: absolute;
+    left: 2px;
+    top: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* When a star or any star before it is hovered/checked, fill it */
+.star:hover,
+.star:hover ~ .star {
+    color: var(--star-gold);
+    /* Smooth transition for the color fill */
+    transition: color 0.3s ease-in-out;
+}
+
+/* Simulate half-star fill using a linear gradient overlay */
+/* This requires JavaScript to make functional, but provides the smooth visual effect */
+.star.half::before {
+    /* Fills 50% from the left with gold, rest transparent */
+    background: linear-gradient(to right, var(--star-gold) 50%, transparent 50%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; /* Hide the default color underneath */
+}
+
+.star.full {
+    color: var(--star-gold); /* Full gold fill */
+}
+
+/* Reset hover effect when leaving the main container */
+.rating-stars:hover .star {
+    color: #ccc;
+}

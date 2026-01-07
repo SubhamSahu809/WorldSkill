@@ -1,0 +1,53 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+  --cube-size: 300px;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fff;
+}
+
+.scene {
+  width: var(--cube-size);
+  height: var(--cube-size);
+  perspective: 1000px; 
+}
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d; 
+  animation: rotateCube 12s infinite linear;
+}
+.face {
+  position: absolute;
+  width: var(--cube-size);
+  height: var(--cube-size);
+  border: 2px solid #000;
+}
+
+.face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.front  { transform: translateZ(calc(var(--cube-size) / 2)); }
+.right  { transform: rotateY(90deg) translateZ(calc(var(--cube-size) / 2)); }
+.back   { transform: rotateY(180deg) translateZ(calc(var(--cube-size) / 2)); }
+.left   { transform: rotateY(-90deg) translateZ(calc(var(--cube-size) / 2)); }
+
+
+@keyframes rotateCube {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); } 
+}
